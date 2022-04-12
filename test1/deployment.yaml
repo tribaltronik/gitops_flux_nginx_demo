@@ -1,0 +1,23 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxdemos-deployment
+  namespace: test1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxdemos
+  template: 
+    metadata:       
+      labels:
+        app: nginxdemos
+    spec:            
+      containers:
+      - name: nginxdemos
+        image: nginxdemos/hello
+        ports:
+        - containerPort: 80
+        # imagePullPolicy -> never - permite obter imagens locais
+        imagePullPolicy: IfNotPresent
